@@ -8,7 +8,6 @@ import { getHoles } from '../lib/database/redis';
 import styles from '../styles/TrackScore.module.css'
 
 function TrackScore(props) {
-    const course = props.course;
     const holes = props.holes;
 
     const [hole, setHole] = useState(0);
