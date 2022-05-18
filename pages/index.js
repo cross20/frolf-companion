@@ -6,7 +6,7 @@ export default function Home(props) {
       <div className="page">
         <h1>Frisbee Golf</h1>
         <main>
-          <p>This is a website to help you find Frisbee golf courses.</p>
+          <p>This is a website to help you find Frisbee golf courses!</p>
         </main>
       </div>
       <style jsx>{`
