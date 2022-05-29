@@ -14,7 +14,7 @@ export default function SignIn({ csrfToken }) {
             </form>
             <p>
                 New to Par Three?
-                <Link href="./signup">
+                <Link href="/auth/signup">
                     <a>Join now</a>
                 </Link>
             </p>
