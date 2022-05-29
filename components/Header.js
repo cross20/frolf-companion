@@ -10,6 +10,8 @@ function Header() {
 
   const { data: session, status } = useSession();
 
+  console.log('session', session);
+
   let left = (
     <div className="left">
       <Link href="/">
