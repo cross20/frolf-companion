@@ -3,43 +3,33 @@ import Link from "next/link"
 
 export default function SignIn({ csrfToken }) {
     return (
-        <div className="container">
-            <div className="card">
-                <form method="POST" action="/api/auth/callback/credentials">
-                    <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-                    <label htmlFor="username">Email</label>
-                    <input name="username" type="email" />
-                    <label htmlFor="password">Password</label>
-                    <input name="password" type="password" />
-                    <button type="submit">Sign in</button>
-                </form>
-                <p>
-                    New to Par Three?
-                    <Link href="./signup">
-                        <a>Join now</a>
-                    </Link>
-                </p>
-            </div>
+        <main className="container">
+            <form method="POST" action="/api/auth/callback/credentials">
+                <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+                <label htmlFor="username">Email</label>
+                <input name="username" type="email" />
+                <label htmlFor="password">Password</label>
+                <input name="password" type="password" />
+                <button type="submit">Sign in</button>
+            </form>
+            <p>
+                New to Par Three?
+                <Link href="./signup">
+                    <a>Join now</a>
+                </Link>
+            </p>
             <style jsx>{`
                 .container {
-                    margin: auto;
-                    width: 25%;
-                    height: 500px;
-                    position: relative;
-                }
-
-                .card {
-                    margin: 0;
-                    width: 100%;
-                    position: absolute;
-                    top: 50%;
-                    -ms-transform: translateY(-50%);
-                    transform: translateY(-50%);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    margin: 1rem;
                 }
 
                 form {
                     margin: 0 0 2rem;
                     padding: 1.5rem 1rem 2rem;
+                    display: block;
                     border-radius: 8px;
                     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
                 }
@@ -89,7 +79,7 @@ export default function SignIn({ csrfToken }) {
                     color: #8B008B;
                 }
             `}</style>
-        </div>
+        </main>
   )
 }
 
