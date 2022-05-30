@@ -52,15 +52,6 @@ const options = {
     }),
   ],
   callbacks: {
-    async redirect({ url, baseUrl }) {
-      console.log('url', url);
-      console.log('baseUrl', baseUrl);
-      // Allows relative callback URLs
-      if (url.startsWith("/")) return `${baseUrl}${url}`
-      // Allows callback URLs on the same origin
-      else if (new URL(url).origin === baseUrl) return url
-      return baseUrl
-    },
     jwt: async ({ token, user }) => {
       if (user) {
         token.id = user.id;
