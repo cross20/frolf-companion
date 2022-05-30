@@ -37,7 +37,7 @@ const options = {
 
           console.log('user', user);
 
-          if (credentials.password && await compare(credentials.password, await hash(credentials.password))) {
+          if (credentials.password && user.password && await compare(credentials.password, user.password)) {
             console.log('authenticated');
 
             return user;
