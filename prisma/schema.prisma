@@ -53,6 +53,7 @@ model User {
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
   accounts      Account[]
   sessions      Session[]
+  courses       Course[]
 
   @@map(name: "users")
 }
@@ -64,4 +65,18 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verificationtokens")
+}
+
+/// Represents a course Frisbee golf can be played on.
+model Course {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+  published   Boolean  @default(false)
+  authorId    String?  @map(name: "author_id")
+  author      User?    @relation(fields: [authorId], references: [id])
+
+  @@map(name: "courses")
 }

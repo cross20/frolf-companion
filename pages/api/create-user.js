@@ -9,5 +9,5 @@ export default async function handler(req, res) {
 
     const user = await createUser(body.email, body.firstName, body.lastName, body.password, null);
 
-    res.status(201).json({user});
+    res.status(201).json({user}); 
 }
