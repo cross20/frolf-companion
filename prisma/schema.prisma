@@ -54,6 +54,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   courses       Course[]
+  holes         Hole[]
 
   @@map(name: "users")
 }
@@ -76,7 +77,24 @@ model Course {
   updatedAt   DateTime @updatedAt @map(name: "updated_at")
   published   Boolean  @default(false)
   authorId    String?  @map(name: "author_id")
-  author      User?    @relation(fields: [authorId], references: [id])
+  author      User?    @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  holes       Hole[]
 
   @@map(name: "courses")
+}
+
+/// Represents a hole within a course.
+model Hole {
+  id          String  @id @default(cuid())
+  name        String  @unique
+  description String
+  order       Int     @unique
+  start       Json    @unique
+  stop        Json    @unique
+  courseId    String  @map("course_id")
+  course      Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  authorId    String? @map(name: "author_id")
+  author      User?   @relation(fields: [authorId], references: [id], onDelete: SetNull)
+
+  @@unique([start, stop])
 }
