@@ -17,11 +17,7 @@ export default function SignUp() {
              body: JSON.stringify(body),
         });
 
-        console.log('res', res);
-
         const content = await res.json();
-
-        console.log('content', content);
 
         e.target.reset();
     }

@@ -30,21 +30,14 @@ const options = {
         // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
         // You can also use the `req` object to obtain additional parameters
         // (i.e., the request IP address)
-        console.log('credentials', credentials);
 
         if (credentials.username) {
           const user = await findUser(credentials.username);
 
-          console.log('user', user);
-
           if (credentials.password && user.password && await compare(credentials.password, user.password)) {
-            console.log('authenticated');
-
             return user;
           }
         }
-
-        console.log('not authenticated');
 
         // Return null if user data could not be retrieved
         return null;
