@@ -1,41 +1,40 @@
-import { useState } from "react";
-import NewHole from "../hole/new-hole";
-
 export default function NewCourse(props) {
 
     if (!props.authorId) {
         throw new Error('Courses must have an author ID');
     }
 
-    const [holes, setHoles] = useState([]);
+    const newCourse = async (e) => {
+        e.preventDefault();
 
-    const addHole = (hole) => {
-        setHoles([...holes, hole]);
+        const formData = new FormData(e.target);
 
-        console.log('hole hit', holes);
+        const res = await fetch('../api/create-course', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: formData.get('name'),
+                description: formData.get('description'),
+                authorId: props.authorId,
+            }),
+        }); // todo: change request url so it's not dependent on location relative to api directory.
+
+        e.target.reset();
     }
 
     return (
-        <div>
-            <form>
-                <label htmlFor="name">
-                    Name
-                    <input type="text" name="name"></input>
-                </label>
-                <label htmlFor="description">
-                    Description
-                    <textarea name="description"></textarea>
-                </label>
-                <button type="submit">Create Course</button>
-            </form>
-            {holes.map((hole) => {
-                return (
-                    <div>
-                        <p>{hole.name}</p>
-                    </div>
-                )
-            })}
-            <NewHole courseId={null} authorId={props.authorId} onSubmit={(hole) => addHole(hole) } />
-        </div>
+        <form onSubmit={(e) => newCourse(e)}>
+            <label htmlFor="name">
+                Name
+                <input type="text" name="name"></input>
+            </label>
+            <label htmlFor="description">
+                Description
+                <textarea name="description"></textarea>
+            </label>
+            <button type="submit">Create Course</button>
+        </form>
     )
 }

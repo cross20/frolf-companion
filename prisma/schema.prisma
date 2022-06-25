@@ -82,7 +82,7 @@ model Course {
 
   @@map(name: "courses")
 }
- 
+
 /// Represents a hole within a course.
 model Hole {
   id          String  @id @default(cuid())

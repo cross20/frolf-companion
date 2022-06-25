@@ -4,7 +4,11 @@ export default function NewHole(props) {
         throw new Error('Holes must have an author ID');
     }
 
-    const addHole = (e) => {
+    if (!props.courseId) {
+        throw new Error('Holes must have a course ID');
+    }
+
+    const newHole = (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
@@ -25,15 +29,13 @@ export default function NewHole(props) {
             authorId: props.authorId,
         }
 
-        if (props.onSubmit) {
-            props.onSubmit(newHole);
-        }
+        // todo: make api call to create hole.
 
         e.target.reset();
     }
 
     return (
-        <form onSubmit={(e) => addHole(e)}>
+        <form onSubmit={(e) => newHole(e)}>
             <label htmlFor="name">
                 Name
                 <input type="text" name="name"></input>
