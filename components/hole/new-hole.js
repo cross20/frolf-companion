@@ -8,28 +8,32 @@ export default function NewHole(props) {
         throw new Error('Holes must have a course ID');
     }
 
-    const newHole = (e) => {
+    const newHole = async (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
 
-        const newHole = {
-            name: formData.get('name'),
-            description: formData.get('description'),
-            order: formData.get('order'),
-            start: {
-                latitude: formData.get('initial-latitude'),
-                longitude: formData.get('initial-longitude'),
+        const res = await fetch('../../../api/create-hole', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
             },
-            stop: {
-                latitude: formData.get('final-latitude'),
-                longitude: formData.get('final-longitude'),
-            },
-            courseId: props.courseId,
-            authorId: props.authorId,
-        }
-
-        // todo: make api call to create hole.
+            body: JSON.stringify({
+                name: formData.get('name'),
+                description: formData.get('description'),
+                index: Number(formData.get('index')),
+                start: {
+                    latitude: Number(formData.get('initial-latitude')),
+                    longitude: Number(formData.get('initial-longitude')),
+                },
+                stop: {
+                    latitude: Number(formData.get('final-latitude')),
+                    longitude: Number(formData.get('final-longitude')),
+                },
+                courseId: props.courseId,
+                authorId: props.authorId,
+            }),
+        }); // todo: change request url so it's not dependent on location relative to api directory.
 
         e.target.reset();
     }
@@ -44,9 +48,9 @@ export default function NewHole(props) {
                 Description
                 <textarea name="description"></textarea>
             </label>
-            <label htmlFor="order">
-                Order
-                <input type="number" name="order" min="0"></input>
+            <label htmlFor="index">
+                Index
+                <input type="number" name="index" min="0"></input>
             </label>
             <h3>Starting Point</h3>
             <label htmlFor="initialLatitude">

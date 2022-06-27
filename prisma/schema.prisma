@@ -86,16 +86,18 @@ model Course {
 /// Represents a hole within a course.
 model Hole {
   id          String  @id @default(cuid())
-  name        String  @unique
+  name        String
   description String
-  order       Int     @unique
-  start       Json    @unique
-  stop        Json    @unique
+  index       Int
+  start       Json
+  stop        Json
   courseId    String  @map("course_id")
   course      Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
   authorId    String? @map(name: "author_id")
   author      User?   @relation(fields: [authorId], references: [id], onDelete: SetNull)
 
-  @@unique([start, stop])
+  @@unique([courseId, name])
+  @@unique([courseId, index])
+  @@unique([courseId, start, stop])
   @@map(name: "holes")
 }
