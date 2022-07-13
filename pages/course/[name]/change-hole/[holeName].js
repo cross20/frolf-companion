@@ -1,23 +1,22 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { getSession } from "next-auth/react";
 
-import NewHole from "../../../components/hole/new-hole";
-import Layout from "../../../components/Layout";
-import Course from "../../../components/course/course";
+import EditHole from "../../../../components/hole/edit-hole";
+import Layout from "../../../../components/Layout";
 
-export default function Create(props) {
+export default function ChangeHole(props) {
     if (!props.authorId) {
         throw new Error('Holes must have an author ID');
     }
 
     const router = useRouter();
-    const { name } = router.query;
+    const { name, holeName } = router.query;
 
-    const [course, setCourse] = useState(null);
+    const [hole, setHole] = useState(null);
 
     useEffect(() => {
-        fetch('../../../api/find-course-by-name', {
+        fetch('../../../../api/find-course-by-name', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -28,22 +27,33 @@ export default function Create(props) {
         }).then((response) => {
             return response.json();
         }).then((data) => {
-            setCourse(data.course);
-        }); // todo: change request url so it's not dependent on location relative to api directory. // todo: handle cases where name includes hyphen.
+            const course = data.course;
+
+            fetch('../../../../api/find-hole-by-name', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    courseId: course.id,
+                    name: holeName.replace('-', ' '),
+                })
+            }).then((response) => {
+                return response.json();
+            }).then((data) => {
+                setHole(data.hole);
+            });
+        });
     }, []);
 
     const Content = () => {
-        if (course) {
+        if (hole) {
             return (
-                <>
-                    <p>Add a new hole to <Course name={course.name} />.</p>
-                    <NewHole courseId={course.id} authorId={props.authorId}/>
-                </>
+                <EditHole holeId={hole.id} />
             )
         } else {
-            // todo: return standarized loading component once created.
             return (
-                <p>Loading</p>
+                <p>Loading...</p>
             )
         }
     }
@@ -51,7 +61,7 @@ export default function Create(props) {
     return (
         <Layout>
             <div>
-                <h1>Create Hole</h1>
+                <h1>Update Hole</h1>
                 <main>
                     <Content />
                 </main>
