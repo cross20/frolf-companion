@@ -1,3 +1,6 @@
+import RenderResult from "next/dist/server/render-result";
+import { useEffect, useState } from "react";
+
 export default function NewHole(props) {
 
     if (!props.authorId) {
@@ -8,10 +11,32 @@ export default function NewHole(props) {
         throw new Error('Holes must have a course ID');
     }
 
+    const [holes, setHoles] = useState([]); // TODO: retrieve holes.
+
+    useEffect(() => {
+        fetch('../../../../../api/find-holes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                courseId: props.courseId,
+            }),
+        }).then((result) => {
+            return result.json();
+        }).then((data) => {
+            console.log('holes', data.holes);
+
+            setHoles(data.holes);
+        });
+    }, []);
+
     const newHole = async (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
+
+        const previousHoleId = formData.get('previousHole');
 
         const res = await fetch('../../../api/create-hole', {
             method: 'POST',
@@ -21,15 +46,17 @@ export default function NewHole(props) {
             body: JSON.stringify({
                 name: formData.get('name'),
                 description: formData.get('description'),
-                index: Number(formData.get('index')),
-                start: {
-                    latitude: Number(formData.get('initial-latitude')),
-                    longitude: Number(formData.get('initial-longitude')),
+                previousHoleId: previousHoleId ? previousHoleId : null,
+                tee: {
+                    latitude: Number(formData.get('initialLatitude')),
+                    longitude: Number(formData.get('initialLongitude')),
                 },
-                stop: {
-                    latitude: Number(formData.get('final-latitude')),
-                    longitude: Number(formData.get('final-longitude')),
+                teeDescription: '',
+                target: {
+                    latitude: Number(formData.get('finalLatitude')),
+                    longitude: Number(formData.get('finalLongitude')),
                 },
+                targetDescription: '',
                 courseId: props.courseId,
                 authorId: props.authorId,
             }),
@@ -48,9 +75,16 @@ export default function NewHole(props) {
                 Description
                 <textarea name="description"></textarea>
             </label>
-            <label htmlFor="index">
-                Index
-                <input type="number" name="index" min="0"></input>
+            <label htmlFor="previousHole">
+                Previous Hole
+                <select name="previousHole">
+                    <option key="empty" value="">--</option>
+                    {holes.map((hole) => {
+                        return (
+                            <option key={hole.id} value={hole.id}>{hole.name}</option>
+                        )
+                    })}
+                </select>
             </label>
             <h3>Starting Point</h3>
             <label htmlFor="initialLatitude">

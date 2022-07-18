@@ -33,11 +33,9 @@ export default function Holes(props) {
             // HOLES
             return (
                 <>
-                    {holes.sort((first, second) => {
-                        return first.index - second.index;
-                    }).map((hole) => {
+                    {holes.map((hole) => {
                         return (
-                            <article key={hole.index}>
+                            <article key={hole.id}>
                                 <h3>{hole.name}</h3>
                                 <p>{`Hole ${hole.index}`}</p>
                                 <p>{hole.description}</p>

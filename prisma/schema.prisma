@@ -72,6 +72,7 @@ model VerificationToken {
 model Course {
   id          String   @id @default(cuid())
   name        String   @unique
+  urlName     String   @unique
   description String
   createdAt   DateTime @default(now()) @map(name: "created_at")
   updatedAt   DateTime @updatedAt @map(name: "updated_at")
@@ -85,19 +86,24 @@ model Course {
 
 /// Represents a hole within a course.
 model Hole {
-  id          String  @id @default(cuid())
-  name        String
-  description String
-  index       Int
-  start       Json
-  stop        Json
-  courseId    String  @map("course_id")
-  course      Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  authorId    String? @map(name: "author_id")
-  author      User?   @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  id                String  @id @default(cuid())
+  name              String
+  urlName           String
+  description       String
+  previousHoleId    String?
+  previousHole      Hole?   @relation("SurroundingHoles", fields: [previousHoleId], references: [id], onDelete: SetNull)
+  nextHoles         Hole[]  @relation("SurroundingHoles")
+  tee               Json
+  teeDescription    String
+  target            Json
+  targetDescription String
+  courseId          String  @map("course_id")
+  course            Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  authorId          String? @map(name: "author_id")
+  author            User?   @relation(fields: [authorId], references: [id], onDelete: SetNull)
 
   @@unique([courseId, name])
-  @@unique([courseId, index])
-  @@unique([courseId, start, stop])
+  @@unique([courseId, urlName])
+  @@unique([courseId, tee, target])
   @@map(name: "holes")
 }

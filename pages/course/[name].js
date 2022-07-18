@@ -18,13 +18,13 @@ export default function Course() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    name: name.replace('-', ' '),
+                    name: name,
                 }),
             }).then((response) => {
                 return response.json();
             }).then((data) => {
                 setCourse(data.course);
-            }); // todo: change request url so it's not dependent on location relative to api directory. // todo: handle cases where name includes hyphen.
+            }); // todo: change request url so it's not dependent on location relative to api directory.
         }
     }, [name]);
 

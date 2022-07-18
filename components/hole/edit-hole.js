@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import AttributeForm from "../AttributeForm";
+import InputForm from "../form/InputForm";
+import TextareaForm from "../form/TextareaForm";
 
 export default function EditHole(props) {
     if (!props.holeId) {
@@ -61,6 +62,8 @@ export default function EditHole(props) {
     const updateIndex = async (e) => {
         return false; // TODO: remove.
 
+
+
         return await updateAttribute(e);
     }
 
@@ -68,9 +71,8 @@ export default function EditHole(props) {
     if (hole) {
         return (
             <>
-                <AttributeForm onSubmit={(e) => updateName(e)} attribute={"name"} defaultValue={hole.name} label={"Name"} type={"text"} />
-                <AttributeForm onSubmit={(e) => updateAttribute(e)} attribute={"description"} defaultValue={hole.description} label={"Description"} type={"textarea"} />
-                <AttributeForm onSubmit={(e) => updateIndex(e)} attribute={"index"} defaultValue={hole.index} label={"Number"} type={"number"} />
+                <InputForm onSubmit={(e) => updateName(e)} attribute="name" label="Name" defaultValue={hole.name}></InputForm>
+                <TextareaForm onSubmit={(e) => updateAttribute(e)} attribute="description" label="Description" defaultValue={hole.description}></TextareaForm>
             </>
         )
     } else {
