@@ -48,22 +48,7 @@ export default function EditHole(props) {
     }
 
     const updateName = async (e) => {
-        // TODO: api call to update name.
-
-        // TODO: set hole.
-
-        // TODO: route to page match new name.
-
-        return false; // TODO: remove;
-
-        return await updateAttribute(e);
-    }
-
-    const updateIndex = async (e) => {
-        return false; // TODO: remove.
-
-
-
+        // TODO: update url name.
         return await updateAttribute(e);
     }
 
