@@ -22,7 +22,7 @@ export default function ChangeHole(props) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                name: name.replace('-', ' '),
+                name: name,
             }),
         }).then((response) => {
             return response.json();
@@ -36,7 +36,7 @@ export default function ChangeHole(props) {
                 },
                 body: JSON.stringify({
                     courseId: course.id,
-                    name: holeName.replace('-', ' '),
+                    name: holeName,
                 })
             }).then((response) => {
                 return response.json();
