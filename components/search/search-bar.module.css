@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 500px;
+    margin: auto;
+}
+
+.searchBar, .search {
+    margin: 5px;
+    padding: 5px;
+}
+
+.searchBar {
+    flex-grow: 1;
+}
