@@ -1,7 +1,10 @@
 .container {
     display: flex;
-    align-content: space-around;
-    justify-content: start;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
+}
+
+@media (max-width: 600px) {
+    .container {
+        flex-direction: column;
+    }
 }

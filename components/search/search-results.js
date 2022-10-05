@@ -1,8 +1,15 @@
+import { useState } from "react";
 import SearchResult from "./search-result";
 import styles from './search-results.module.css'
 
 export default function SearchResults() {
-    const results = [{title: 'Result 1', description: 'This is the first result. This is a test'}, {title: 'Result 2', description: 'This is the second result.'}];
+    const [results, setResults] = useState([{urlName: 'whitworth', title: 'Whitworth', description: 'This is the first result.'}, 
+    {urlName: 'whitworth', title: 'Whitworth', description: 'This is the first result. This is the first result. This is the first result. This is the first result. This is the first result. This is the first result. This is the first result. This is the first result. This is the first result. This is the first result. This is the first result. This is the first result. This is the first result. This is the first result. This is the first result. This is the first result.'}, 
+    {urlName: 'whitworth', title: 'Whitworth', description: 'This is the first result.'}, 
+    {urlName: 'whitworth', title: 'Whitworth', description: 'This is the first result.'}, 
+    {urlName: 'whitworth', title: 'Whitworth', description: 'This is the first result.'}, 
+    {urlName: 'whitworth', title: 'Whitworth', description: 'This is the first result.'}, 
+    {urlName: 'new-course', title: 'New Course', description: 'This is the second result.'}]);
 
     return (
         <div className={styles.container}>
