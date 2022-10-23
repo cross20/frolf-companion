@@ -13,7 +13,7 @@ export default function SearchResult(props) {
                 <a className={styles.link}>
                     <section className={styles.content}>
                         <span className={styles['image']}>
-                            <Image src={image.src} alt={'A skyline'} layout={'fill'} objectFit={'cover'} style={{borderRadius: '1rem 0 0 1rem'}} />
+                            <Image src={image.src} alt={'A skyline'} layout={'fill'} objectFit={'cover'} style={{borderRadius: '1rem 0 0 1rem'}} priority />
                         </span>
                         <span className={styles['body']}>
                             <h2>{result.title}</h2>
