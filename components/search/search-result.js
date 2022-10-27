@@ -16,7 +16,7 @@ export default function SearchResult(props) {
                             <Image src={image.src} alt={'A skyline'} layout={'fill'} objectFit={'cover'} style={{borderRadius: '1rem 0 0 1rem'}} priority />
                         </span>
                         <span className={styles['body']}>
-                            <h2>{result.title}</h2>
+                            <h2>{result.name}</h2>
                             <p>{result.description}</p>
                         </span>
                     </section>
