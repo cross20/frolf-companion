@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react'
 import styles from './search-result.module.css'
-import image from './/skyline_temp.jpg'
+import image from './/temp.png'
 
 export default function SearchResult(props) {
     const [result, setResult] = useState(props.result);
