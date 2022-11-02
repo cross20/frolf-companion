@@ -121,8 +121,8 @@ function Header() {
             Feed
           </a>
         </Link>
-        <Link href="">
-          <a data-active={isActive('')}>Link to nowhere</a>
+        <Link href="/explore">
+          <a data-active={isActive('')}>Find a Course</a>
         </Link>
         <style jsx>{`
           .bold {
