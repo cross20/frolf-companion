@@ -1,10 +1,12 @@
+import GameContainer from "../../components/game/GameContainer";
 import Layout from "../../components/Layout";
 
 export default function Game({ gameData }) {
-    // TODO: add content to page.
-    return <Layout>
-        <p>{`Hey there the game id is ${gameData.id}. It was started on ${new Date(gameData.createdAt).toString()}.${(gameData.completedAt ? ` It was completed at ${new Date(gameData.completedAt).toString()}` : '')}`}</p>
-    </Layout>
+    return (
+        <Layout>
+            <GameContainer game={gameData} />
+        </Layout>
+    );
 }
 
 export function getAllGameIds() {
