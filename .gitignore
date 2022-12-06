@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+# development
+**/playground.**
+
 # next.js
 /.next/
 /out/
