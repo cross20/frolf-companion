@@ -1,0 +1,49 @@
+.hole, .current-hole {
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    border: 1px solid red; /* TODO: remove border */
+}
+
+.current-hole {
+    background-color: lightgrey;
+}
+
+.content {
+    height: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.information {
+    margin: 0;
+    padding: 0.5rem;
+    border: 5px solid blue; /* TODO: remove border */
+    width: 60%;
+}
+
+.name, .description {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* TODO: implement solution for multiline overflow. */
+
+.attributes {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.attribute {
+    border: 1px solid red; /* TODO: remove border */
+}
+
+.thumbnail {
+    border: 5px solid green; /* TODO: remove border */
+    width: 40%; /* TODO: make thumbnail square */
+}

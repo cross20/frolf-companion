@@ -1,10 +1,10 @@
-import GameContainer from "../../components/game/GameContainer";
+import Game from "../../components/game/Game";
 import Layout from "../../components/Layout";
 
-export default function Game({ gameData }) {
+export default function Gamee({ game }) {
     return (
         <Layout>
-            <GameContainer game={gameData} />
+            <Game game={game} />
         </Layout>
     );
 }
@@ -27,7 +27,36 @@ function getGameData(id) {
     // TODO: get game from database based on ID.
 
     function Game(id) {
+        const hole = {id: 1000, 
+            name: 'A hole', 
+            description: 'This is a hole used for testing pruposes.', 
+            par: 3, 
+            type: {id: 0, name: 'Standard'}, 
+            difficulty: {id: 0, name: 'Easy'},
+            tee: {id: 0, description: 'This is a description used for testing purposes.'},
+            target: {id: 2, description: 'This is a description used for testing purposes.'}};
+
+        const anotherHole = {id: 1001, 
+            name: 'Another hole', 
+            description: 'This is another hole used for testing purposes. It has a longer description than the other test hole.',
+            par: 8, 
+            type: {id: 1, name: 'Bonus'}, 
+            difficulty: {id: 2, name: 'Hard'},
+            tee: {id: 0, description: 'This is another description used for testing purposes.'},
+            target: {id: 2, description: 'This is another description used for testing purposes.'}};
+
+        const otherHole = {id: 1002, 
+            name: 'Other hole', 
+            description: 'This is an other hole used for testing pruposes.', 
+            par: 4, 
+            type: {id: 0, name: 'Standard'}, 
+            difficulty: {id: 0, name: 'Medium'},
+            tee: {id: 0, description: 'This is an other description used for testing purposes.'},
+            target: {id: 2, description: 'This is an other description used for testing purposes.'}};
+
         this.id = id;
+        this.holes = [hole, anotherHole, otherHole];
+        this.currentHole = hole.id;
         this.score = 0;
         this.createdAt = new Date().toString();
         this.completedAt = null;
@@ -55,11 +84,11 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const gameData = getGameData(params.id);
+    const game = getGameData(params.id);
     
     return {
         props: {
-            gameData,
+            game,
         },
     };
 }

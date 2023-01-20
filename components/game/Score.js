@@ -1,11 +1,11 @@
-import styles from './ScoreCard.module.css'
+import styles from './Score.module.css'
 
-export default function ScoreCard({ currentScore, updateScore }) {
+export default function Score({ currentScore, updateScore }) {
     return (
-        <section className={styles.container}>
+        <article className={styles.container}>
             <button onClick={() => updateScore(false)} aria-label={`Decrease score`}>Decrease</button>
             <output className={styles.score}>{currentScore.toLocaleString()}</output>
             <button onClick={() => updateScore(true)} aria-label={`Increase score`}>Increase</button>
-        </section>
+        </article>
     );
 }

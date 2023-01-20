@@ -1,0 +1,19 @@
+.game {
+    display: flex;
+    flex-direction: row;
+    margin: -1rem;
+}
+
+.holes {
+    width: 33%;
+    border: 1px solid brown; /* TODO: remove border */
+}
+
+.current-hole {
+    width: 67%;
+}
+
+.holes, .current-hole {
+    margin: 0;
+    padding: 1rem;
+}
